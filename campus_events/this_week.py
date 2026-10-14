@@ -10,16 +10,21 @@ def this_week(csv_path, today):
     """Return the events starting in the 7 days from `today`, soonest first.
 
     The window is today at midnight up to, not including, midnight 7 days
-    later. Each event is a dict with the CSV columns, and `start` is a datetime.
+    later. An event posted in more than one place (same title and start time,
+    ignoring case and stray spaces) is listed once. Each event is a dict with
+    the CSV columns, and `start` is a datetime.
     """
     window_start = datetime.combine(today, datetime.min.time())
     window_end = window_start + timedelta(days=7)
 
     events = []
+    seen = set()
     with open(csv_path, newline="") as f:
         for row in csv.DictReader(f):
             start = datetime.strptime(row["start"], START_FORMAT)
-            if window_start <= start < window_end:
+            key = (row["title"].strip().lower(), start)
+            if window_start <= start < window_end and key not in seen:
+                seen.add(key)
                 events.append({**row, "start": start})
 
     events.sort(key=lambda event: event["start"])

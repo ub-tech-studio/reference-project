@@ -38,15 +38,42 @@ environment works.
 Each week's work lands here after the session, so you can read back over
 anything that went past too quickly in the room.
 
-## Status
+## What we are building
 
-The project subject is being finalised and lands here before Week 2 on
-September 17, which is the first session with a Show hour. Week 1 is
-orientation, team formation, and account setup, so there is nothing you need
-from this repository on day one.
+A single place where first-year commuter students see this week's campus
+events. Today those events are scattered across email, flyers, and three
+Instagram accounts, so commuters hear about them after the fact. The full
+problem statement and scope are in [`docs/`](docs/).
 
-The skeleton is already in place: a uv project pinned to Python 3.14.7, a
-`.gitignore`, a starter `main.py` that runs, the four `docs/` files every team
-fills in, and a pull request template. Same starting point your team
-repository gets from
-[tech-studio-starter](https://github.com/ub-tech-studio/tech-studio-starter).
+## How the project is laid out
+
+```
+campus_events/        the app's code, one module per job
+  this_week.py        picks this week's events (built live in Week 6)
+data/events.csv       the events we know about, one row each
+tests/                checks that the code does what we say it does
+docs/                 problem statement, scope, components, team charter
+main.py               the file you run
+```
+
+## How to run the tests
+
+```
+uv sync
+uv run pytest
+```
+
+`uv sync` installs pytest the first time. You should see `1 passed`, or more
+once the Week 6 module lands. A red `F` means a test failed: read the message
+under it, it tells you which line and why.
+
+## Where each week starts
+
+Each week that builds code gets a tag for its starting point, so you can see
+exactly what the room saw:
+
+```
+git checkout week6-start
+```
+
+`git checkout main` brings you back to the latest version.

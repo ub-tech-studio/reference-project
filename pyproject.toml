@@ -5,3 +5,13 @@ description = "The shared reference project facilitators build live during the S
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = []
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
+
+[tool.pytest.ini_options]
+# Lets the tests import campus_events from the project folder.
+pythonpath = ["."]
+testpaths = ["tests"]
